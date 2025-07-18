@@ -1,0 +1,235 @@
+$pimary-color:#FFF;
+$font-stack: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+$shadow-color: rgba(0,0,0,0.2);
+.hb-header {
+    display: flex;
+    flex-direction: column;
+
+    .header-wrapper-top {
+        height: 55vh;
+        background-image: url('../img/background.png');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+
+        .header-image-part {
+            display: flex;
+            flex-flow: column wrap;
+
+            .header-top {
+                display: flex;
+                flex-flow: row wrap;
+                align-items: center;
+
+                .logo {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    margin-top: 40px;
+                    margin-left: 200px;
+                    font-size: 20px;
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+                    cursor: pointer;
+                    color: $pimary-color;
+                    font-weight: bold;
+
+                    .logo-text {
+                        margin: 5px;
+                        span{
+                            display: block;
+                            margin: 3px;
+                        }
+                    }
+
+                    .logo-icon {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        top:-10px;
+                        left: -50px;
+                    }
+                }
+            }
+            
+            .header-bottom {
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .title {
+                    font-size: 300%;
+                    color: $pimary-color
+                }
+
+                .line-between {
+                    display: flex;
+                    flex-direction: row;
+
+                    .zig-zag-line {
+                        --s: 2px; /* size of the wave */
+                        --b: 1px; /* thickness of the line */
+                        --m: 0.4; /* curvature of the wave [0 2] */
+                        
+                        background: $pimary-color;
+                        --R: calc(var(--s)*sqrt(var(--m)*var(--m) + 1) + var(--b)/2);
+                        height: calc(2*var(--R));
+                        width: 100%;
+                        --_g: #0000 calc(99% - var(--b)), #000 calc(101% - var(--b)) 99%, #0000 101%;
+                        mask:
+                            radial-gradient(var(--R) at left 50% bottom calc(-1*var(--m)*var(--s)), var(--_g)) 
+                            calc(50% - 2*var(--s)) calc(50% - var(--s)/2 - var(--b)/2)/calc(4*var(--s)) calc(var(--s) + var(--b)) repeat-x,
+                            radial-gradient(var(--R) at left 50% top calc(-1*var(--m)*var(--s)),var(--_g)) 
+                            50% calc(50% + var(--s)/2 + var(--b)/2)/calc(4*var(--s)) calc(var(--s) + var(--b)) repeat-x;
+
+                        width: 200px;
+                    }
+                }
+
+                .cutlery-icon {
+                    position:relative;
+                    top:-4px;
+                    width: 10px;
+                    height: 10px;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                }
+            }
+        }
+
+    }
+}
+
+.product-section {
+    padding: 40px;
+    font-family: $font-stack;
+    background-color: #f8f8f8;
+
+    .product-form {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: 0 0 10px $shadow-color;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            div {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                }
+
+                input {
+                    padding: 8px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
+
+                select {
+                    padding: 8px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    background: white;
+                    width: auto;
+                }
+            }
+
+            button {
+                align-self: flex-start;
+                padding: 10px 20px;
+                background: #333;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+
+                &:hover {
+                    background: #555;
+                }
+            }
+        }
+    }
+
+    .product-list {
+        
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        #productsContainer {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+            .product-card {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                background-color: $pimary-color;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0,0.1);
+
+                img {
+                    width: 150px;
+                    height: 150px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin-bottom: 5px 0;
+                }
+
+                h3 {
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin: 5px 0;
+                }
+
+                .category {
+                    font-size: 14px;
+                    color: gray;
+                    margin: 5px 0;
+                }
+
+                .price {
+                    color:orange;
+                    font-weight: bold;
+                    font-size: 16px;
+                    margin-top: 10px;
+                }
+
+                &:hover {
+                    transform: scale(1.1);
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                }
+            }
+        }
+    }
+}
+
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --main-font: $font-stack;
+}
+
+html,body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}

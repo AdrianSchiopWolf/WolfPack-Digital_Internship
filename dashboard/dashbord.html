@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard</title>
+        <link rel="stylesheet" href="style.css">
+        <script type="text/javascript" src="../js/dashboard.js"></script>
+    </head>
+    <body>
+        <header class="hb-header">
+            <div class="header-wrapper-top">
+                <div class="header-image-part">
+                    <div class="header-top">
+                        <div class="logo" onclick="window.location.href='http:\/\/127.0.0.1:5501\/foodwebsite\/food-website.html'">
+                            <img src="../img/logo.png" alt="Coffee Logo" class="logo-icon"></img>
+                            <div class="logo-text">
+                            <span>Evrika</span>
+                            <span>Caffee</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-bottom">
+                        <h1 class="title">Dashboard</h1>
+                        <div class="line-between">
+                        <div class="zig-zag-line"></div>
+                        <img src="../img/cutlery.png" alt=":\" class="cutlery-icon">
+                        <div class="zig-zag-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="product-section">
+            <section class="product-form">
+                <h2>Add New Product</h2>
+                <form id="productForm">
+                    <div>
+                        <label for="productName">Dish name:</label>
+                        <input type="text" id="productName" required>
+                    </div>
+                    <div>
+                        <label for="productCategory">Category:</label>
+                        <select id="productCategory" required>
+                            <option value="">-- Select Category --</option>
+                            <option value="Second Courses">Second Courses</option>
+                            <option value="Entrees">Entrees</option>
+                            <option value="Salads">Salads</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="productPrice">Price:</label>
+                        <input type="number" id="productPrice" required>
+                    </div>
+                    <div>
+                        <label for="productPhoto">Photo:</label required>
+                        <input type="text" id="productPhoto">
+                    </div>
+                    <button type="submit">Add Product</button>
+                </form>
+            </section>
+
+            <section class="product-list">
+                <h2>Product List</h2>
+                <div id="productsContainer"></div>
+            </section>
+        </main>
+    </body>
+</html>
