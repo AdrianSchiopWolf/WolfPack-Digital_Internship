@@ -32,11 +32,7 @@ build-iPhoneSimulator/
 #
 # vendor/Pods/
 ### VisualStudioCode ###
-.vscode/*    
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+
 ## Documentation cache and generated files:
 /.yardoc/
 /_yardoc/
