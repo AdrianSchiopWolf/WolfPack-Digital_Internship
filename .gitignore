@@ -11,7 +11,7 @@
 /tmp/
 
 # Used by dotenv library to load environment variables.
-# .env
+.env
 
 # Ignore Byebug command history file.
 .byebug_history
@@ -43,15 +43,23 @@ build-iPhoneSimulator/
 /.bundle/
 /vendor/bundle
 /lib/bundler/man/
+# Ignore the default bundler config file.
+/.bundle/config
+.vscode
 
+
+
+# If you are using Bundler to manage your application's dependencies, you should
 # for a library or gem, you might want to ignore these files since the code is
 # intended to run in multiple environments; otherwise, check them in:
-# Gemfile.lock
-# .ruby-version
-# .ruby-gemset
-
+Gemfile
+Gemfile.lock
+.ruby-version
+.ruby-gemset
+.rubocop.yml
+.rubocop_todo.yml
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
 # Used by RuboCop. Remote config files pulled in from inherit_from directive.
-# .rubocop-https?--*
+.rubocop-https?--*
