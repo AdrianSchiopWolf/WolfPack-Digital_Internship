@@ -1,6 +1,7 @@
 require_relative '../model/account'
 require_relative '../errors/validation_error'
 require 'singleton'
+
 class AccountRepository
   include Singleton
 
@@ -17,19 +18,25 @@ class AccountRepository
   end
 
   def delete_account(account_id)
-    find_account_by_id(account_id)
+    account = find_account_by_id!(account_id)
+    raise ValidationError, 'Account not found' if account.nil?
+
     @accounts.reject! { |account| account.id == account_id }
   end
 
-  def find_account_by_id(account_id)
-    account = @accounts.find { |account| account.id == account_id }
+  def find_account_by_id!(account_id)
+    account = find_account_by_id(account_id)
     raise ValidationError, 'Account not found' unless account
 
     account
   end
 
+  def find_account_by_id(account_id)
+    @accounts.find { |account| account.id == account_id }
+  end
+
   def update_account(account_id, attributes)
-    account = find_account_by_id(account_id)
+    account = find_account_by_id!(account_id)
     attributes.each do |key, value|
       if account.respond_to?("#{key}=")
         account.send("#{key}=", value)
@@ -37,5 +44,9 @@ class AccountRepository
         puts "Attribute #{key} does not exist on Account"
       end
     end
+  end
+
+  def clear
+    @accounts.clear
   end
 end

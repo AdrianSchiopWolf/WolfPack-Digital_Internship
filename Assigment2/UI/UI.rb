@@ -113,16 +113,7 @@ class UI
     account_id = prompt('Enter account ID to view info')
     account = @controller.find_account_by_id(account_id.to_i)
 
-    if account
-      puts "Account ID: #{account.id}"
-      puts "Name: #{account.name}"
-      puts "Job: #{account.job}"
-      puts "Email: #{account.email}"
-      puts "Address: #{account.address}"
-      puts "Balance: #{account.balance}"
-    else
-      puts 'Account not found.'
-    end
+    puts account || 'Account not found.'
   end
 
   def send_money
@@ -133,7 +124,7 @@ class UI
     transaction_account_attributes = {
       id: Time.now.to_i, # Using current time as a simple unique ID
       sender_id: sender_id.to_i,
-      reciver_id: receiver_id.to_i,
+      receiver_id: receiver_id.to_i,
       amount: amount.to_f,
       timestamp: Time.now
     }
@@ -148,7 +139,7 @@ class UI
       puts 'No accounts found.'
     else
       accounts.each do |account|
-        puts "Account ID: #{account.id}, Name: #{account.name}, Balance: #{account.balance}"
+        puts account
       end
     end
   end

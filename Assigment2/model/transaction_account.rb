@@ -1,16 +1,15 @@
 class TransactionAccount
-  attr_accessor :id, :amount, :date, :sender_id, :reciver_id
+  attr_accessor :id, :amount, :sender_id, :receiver_id, :timestamp
 
-  def initialize(id, amount, sender_id, reciver_id, timestamp)
+  def initialize(id, amount, sender_id, receiver_id, timestamp)
     @id = id
     @amount = amount
-    @date = date
     @sender_id = sender_id
-    @reciver_id = reciver_id
+    @receiver_id = receiver_id
     @timestamp = timestamp
   end
 
   def to_s
-    "Transaction ID: #{@id}, Amount: #{@amount}, Date: #{@date}, Account ID: #{@sender_id}, ATM ID: #{@reciver_id}"
+    "Transaction ID: #{@id}, Amount: #{@amount}, Account ID: #{@sender_id}, ATM ID: #{@receiver_id}, Timestamp: #{@timestamp}"
   end
 end
