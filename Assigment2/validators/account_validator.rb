@@ -1,4 +1,5 @@
 require_relative '../repository/accounts_repository'
+
 class AccountValidator
   def self.validate(account)
     raise ValidationError, 'ID cannot be nil' if account.id.nil?

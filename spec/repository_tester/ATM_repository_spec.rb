@@ -8,7 +8,7 @@ RSpec.describe 'ATMsRepository' do
     it 'adds an ATM to the repository' do
       atm_repository.add_atm(atm)
       expect(atm_repository.all_atms.size).to eq(1)
-      expect(atm_repository.all_atms.first.id).to eq(1)
+      expect(atm_repository.all_atms.first.id).to eq(atm.id)
       expect(atm_repository.all_atms.first.location).to eq('Downtown')
     end
   end

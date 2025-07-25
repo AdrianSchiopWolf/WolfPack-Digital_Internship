@@ -9,6 +9,7 @@ RSpec.describe 'Controller' do
       account_attributes = { id: 1, name: 'John Doe', job: 'Developer', email: 'adrian@gmail.com', address: '123 Main St', balance: 1000.0 }
       expect { controller.add_account(account_attributes) }.not_to raise_error
     end
+
     it 'raises an error for invalid account' do
       account_attributes = { id: nil, name: '', job: '', email: '', address: '', balance: -100.0 }
       expect { controller.add_account(account_attributes) }.to output(/Error adding account/).to_stdout
@@ -129,34 +130,42 @@ RSpec.describe 'Controller' do
       transaction_account_attributes = { id: 1, amount: 100.0, sender_id: 1, receiver_id: 2, timestamp: Time.now }
       expect { controller.add_transaction_account(transaction_account_attributes) }.not_to raise_error
     end
+
     it 'raises an error for invalid transaction account' do
       transaction_account_attributes = { id: nil, amount: -50.0, sender_id: nil, receiver_id: nil, timestamp: Time.now }
       expect { controller.add_transaction_account(transaction_account_attributes) }.to output(/Error adding transaction account/).to_stdout
     end
+
     it 'raises an error for transaction with insufficient funds' do
       transaction_account_attributes = { id: 2, amount: 2000.0, sender_id: 1, receiver_id: 2, timestamp: Time.now }
       expect { controller.add_transaction_account(transaction_account_attributes) }.to output(/Error adding transaction account/).to_stdout
     end
+
     it 'raises an error for transaction with zero or negative amount' do
       transaction_account_attributes = { id: 3, amount: 0.0, sender_id: 1, receiver_id: 2, timestamp: Time.now }
       expect { controller.add_transaction_account(transaction_account_attributes) }.to output(/Error adding transaction account/).to_stdout
     end
+
     it 'raises an error for transaction with nil sender ID' do
       transaction_account_attributes = { id: 4, amount: 100.0, sender_id: nil, receiver_id: 2, timestamp: Time.now }
       expect { controller.add_transaction_account(transaction_account_attributes) }.to output(/Error adding transaction account/).to_stdout
     end
+
     it 'raises an error for transaction with nil receiver ID' do
       transaction_account_attributes = { id: 5, amount: 100.0, sender_id: 1, receiver_id: nil, timestamp: Time.now }
       expect { controller.add_transaction_account(transaction_account_attributes) }.to output(/Error adding transaction account/).to_stdout
     end
+
     it 'raises an error for transaction with same sender and receiver ID' do
       transaction_account_attributes = { id: 6, amount: 100.0, sender_id: 1, receiver_id: 1, timestamp: Time.now }
       expect { controller.add_transaction_account(transaction_account_attributes) }.to output(/Error adding transaction account/).to_stdout
     end
+
     it 'raises an error for transaction with non-positive sender ID' do
       transaction_account_attributes = { id: 7, amount: 100.0, sender_id: -1, receiver_id: 2, timestamp: Time.now }
       expect { controller.add_transaction_account(transaction_account_attributes) }.to output(/Error adding transaction account/).to_stdout
     end
+
     it 'raises an error for transaction with non-positive receiver ID' do
       transaction_account_attributes = { id: 8, amount: 100.0, sender_id: 1, receiver_id: -2, timestamp: Time.now }
       expect { controller.add_transaction_account(transaction_account_attributes) }.to output(/Error adding transaction account/).to_stdout
@@ -168,35 +177,44 @@ RSpec.describe 'Controller' do
       account_attributes = { id: 1, name: 'John Doe', job: 'Developer', email: 'ada@gmail.com', address: '123 Main St', balance: 1000.0 }
       controller.add_account(account_attributes) # Add an account to delete
     end
+
     it 'deletes an existing account' do
       expect { controller.delete_account(1) }.not_to raise_error
       expect(controller.find_account_by_id(1)).to be_nil
     end
+
     it 'raises an error for non-existing account' do
       expect { controller.delete_account(999) }.to output(/Error deleting account/).to_stdout
     end
+
     it 'raises an error for nil account ID' do
       expect { controller.delete_account(nil) }.to output(/Error deleting account/).to_stdout
     end
+
     it 'raises an error for non-positive account ID' do
       expect { controller.delete_account(-1) }.to output(/Error deleting account/).to_stdout
     end
   end
+
   describe '#delete_atm' do
     before do
       atm_attributes = { id: 1, location: 'Downtown' }
       controller.add_atm(atm_attributes) # Add an ATM to delete
     end
+
     it 'deletes an existing ATM' do
       expect { controller.delete_atm(1) }.not_to raise_error
       expect(controller.find_atm_by_id(1)).to be_nil
     end
+
     it 'raises an error for non-existing ATM' do
       expect { controller.delete_atm(999) }.to output(/Error deleting ATM/).to_stdout
     end
+
     it 'raises an error for nil ATM ID' do
       expect { controller.delete_atm(nil) }.to output(/Error deleting ATM/).to_stdout
     end
+
     it 'raises an error for non-positive ATM ID' do
       expect { controller.delete_atm(-1) }.to output(/Error deleting ATM/).to_stdout
     end
@@ -208,18 +226,22 @@ RSpec.describe 'Controller' do
       account_attributes = { id: 1, name: 'John Doe', job: 'Developer', email: 'adrian@gmail.com', address: '123 Main St', balance: 1000.0 }
       controller.add_account(account_attributes) # Add an account to find
     end
+
     it 'finds an existing account by ID' do
       account = controller.find_account_by_id(1)
       expect(account).not_to be_nil
       expect(account.id).to eq(1)
       expect(account.name).to eq('John Doe')
     end
+
     it 'returns nil for non-existing account' do
       expect { controller.find_account_by_id(999) }.to output(/Error finding account/).to_stdout
     end
+
     it 'raises an error for nil account ID' do
       expect { controller.find_account_by_id(nil) }.to output(/Error finding account/).to_stdout
     end
+
     it 'raises an error for non-positive account ID' do
       expect { controller.find_account_by_id(-1) }.to output(/Error finding account/).to_stdout
     end
@@ -229,18 +251,22 @@ RSpec.describe 'Controller' do
       atm_attributes = { id: 1, location: 'Downtown' }
       controller.add_atm(atm_attributes) # Add an ATM to find
     end
+
     it 'finds an existing ATM by ID' do
       atm = controller.find_atm_by_id(1)
       expect(atm).not_to be_nil
       expect(atm.id).to eq(1)
       expect(atm.location).to eq('Downtown')
     end
+
     it 'returns nil for non-existing ATM' do
       expect { controller.find_atm_by_id(999) }.to output(/Error finding ATM/).to_stdout
     end
+
     it 'raises an error for nil ATM ID' do
       expect { controller.find_atm_by_id(nil) }.to output(/Error finding ATM/).to_stdout
     end
+
     it 'raises an error for non-positive ATM ID' do
       expect { controller.find_atm_by_id(-1) }.to output(/Error finding ATM/).to_stdout
     end
@@ -255,6 +281,7 @@ RSpec.describe 'Controller' do
       transaction_account_attributes = { id: 1, amount: 100.0, sender_id: 1, receiver_id: 2, timestamp: Time.now }
       controller.add_transaction_account(transaction_account_attributes) # Add a transaction to find
     end
+
     it 'finds an existing transaction account by ID' do
       transaction = controller.find_transaction_account_by_id(1)
       expect(transaction).not_to be_nil
@@ -263,12 +290,15 @@ RSpec.describe 'Controller' do
       expect(transaction.sender_id).to eq(1)
       expect(transaction.receiver_id).to eq(2)
     end
+
     it 'returns nil for non-existing transaction account' do
       expect { controller.find_transaction_account_by_id(999) }.to output(/Error finding transaction account/).to_stdout
     end
+
     it 'raises an error for nil transaction account ID' do
       expect { controller.find_transaction_account_by_id(nil) }.to output(/Error finding transaction account/).to_stdout
     end
+
     it 'raises an error for non-positive transaction account ID' do
       expect { controller.find_transaction_account_by_id(-1) }.to output(/Error finding transaction account/).to_stdout
     end
@@ -282,6 +312,7 @@ RSpec.describe 'Controller' do
       transaction_atm_attributes = { id: 1, account_id: 1, atm_id: 1, amount: 100.0, timestamp: Time.now, is_withdrawal: true }
       controller.add_transaction_atm(transaction_atm_attributes) # Add a transaction ATM to find
     end
+
     it 'finds an existing transaction ATM by ID' do
       transaction = controller.find_transaction_atm_by_id(1)
       expect(transaction).not_to be_nil
@@ -290,12 +321,15 @@ RSpec.describe 'Controller' do
       expect(transaction.account_id).to eq(1)
       expect(transaction.atm_id).to eq(1)
     end
+
     it 'returns nil for non-existing transaction ATM' do
       expect { controller.find_transaction_atm_by_id(999) }.to output(/Error finding transaction ATM/).to_stdout
     end
+
     it 'raises an error for nil transaction ATM ID' do
       expect { controller.find_transaction_atm_by_id(nil) }.to output(/Error finding transaction ATM/).to_stdout
     end
+
     it 'raises an error for non-positive transaction ATM ID' do
       expect { controller.find_transaction_atm_by_id(-1) }.to output(/Error finding transaction ATM/).to_stdout
     end
@@ -306,6 +340,7 @@ RSpec.describe 'Controller' do
       account_attributes = { id: 1, name: 'John Doe', job: 'Developer', email: 'ada@gmail.com', address: '123 Main St', balance: 1000.0 }
       controller.add_account(account_attributes) # Add an account to update
     end
+
     it 'updates an existing account' do
       updated_attributes = { name: 'John Smith', job: 'Senior Developer', email: 'adi@gmail.com', address: '123 Main St', balance: 1200.0 }
 
@@ -317,26 +352,32 @@ RSpec.describe 'Controller' do
       expect(account.address).to eq('123 Main St')
       expect(account.balance).to eq(1200.0)
     end
+
     it 'raises an error for non-existing account' do
       updated_attributes = { name: 'Nonexistent', job: 'Tester', email: 'adi@gmail.com', address: '123 Main St', balance: 1000.0 }
       expect { controller.update_account(999, updated_attributes) }.to output(/Error updating account/).to_stdout
     end
+
     it 'raises an error for nil account ID' do
       updated_attributes = { name: 'John Smith', job: 'Senior Developer', email: 'adi@gmail.com', address: '123 Main St', balance: 1200.0 }
       expect { controller.update_account(nil, updated_attributes) }.to output(/Error updating account/).to_stdout
     end
+
     it 'raises an error for non-positive account ID' do
       updated_attributes = { name: 'John Smith', job: 'Senior Developer', email: 'adi@gmail.com', address: '123 Main St', balance: 1200.0 }
       expect { controller.update_account(-1, updated_attributes) }.to output(/Error updating account/).to_stdout
     end
+
     it 'raises an error for invalid email format' do
       updated_attributes = { name: 'John Smith', job: 'Senior Developer', email: 'invalid-email', address: '123 Main St', balance: 1200.0 }
       expect { controller.update_account(1, updated_attributes) }.to output(/Error updating account/).to_stdout
     end
+
     it 'raises an error for invalid name format' do
       updated_attributes = { name: 'John123', job: 'Senior Developer', email: 'adi@gmail.com', address: '123 Main St', balance: 1200.0 }
       expect { controller.update_account(1, updated_attributes) }.to output(/Error updating account/).to_stdout
     end
+
     it 'raises an error for invalid job format' do
       updated_attributes = { name: 'John Smith', job: 'Senior123', email: 'adi@gmail.com', address: '123 Main St', balance: 1200.0 }
       expect { controller.update_account(1, updated_attributes) }.to output(/Error updating account/).to_stdout
@@ -350,6 +391,7 @@ RSpec.describe 'Controller' do
       controller.add_account(account_attributes1)
       controller.add_account(account_attributes2)
     end
+
     it 'returns all accounts' do
       accounts = controller.all_accounts
       expect(accounts.size).to eq(2)
@@ -370,12 +412,14 @@ RSpec.describe 'Controller' do
       controller.add_atm(atm_attributes1)
       controller.add_atm(atm_attributes2)
     end
+
     it 'returns all ATMs' do
       atms = controller.all_atms
       expect(atms.size).to eq(2)
       expect(atms.map(&:id)).to contain_exactly(1, 2)
       expect(atms.map(&:location)).to contain_exactly('Downtown', 'Uptown')
     end
+
     it 'returns an empty array when no ATMs exist' do
       controller.delete_atm(1)
       controller.delete_atm(2)
@@ -383,6 +427,7 @@ RSpec.describe 'Controller' do
       expect(atms).to be_empty
     end
   end
+
   describe '#all_transaction_accounts' do
     before do
       account_attributes1 = { id: 1, name: 'John Doe', job: 'Developer', email: 'adiad@gmail.com', address: '123 Main St', balance: 1000.0 }
@@ -412,6 +457,7 @@ RSpec.describe 'Controller' do
       transaction_atm_attributes = { id: 1, account_id: 1, atm_id: 1, amount: 100.0, timestamp: Time.now, is_withdrawal: true }
       controller.add_transaction_atm(transaction_atm_attributes)
     end
+
     it 'returns all transaction ATMs' do
       transactions = controller.all_transactions_atm
       expect(transactions.size).to eq(1)

@@ -3,6 +3,7 @@ require_relative '../spec_helper'
 RSpec.describe 'TransactionATMRepository' do
   let(:transaction_atm_repository) { TransactionATMRepository.instance }
   let(:transaction_atm) { TransactionATM.new(1, 1, 1, 100.0, Time.now, true) }
+
   describe '#add_transaction_atm' do
     it 'adds a transaction ATM to the repository' do
       transaction_atm_repository.add_transaction_atm(transaction_atm)
@@ -14,6 +15,7 @@ RSpec.describe 'TransactionATMRepository' do
       expect(transaction_atm_repository.all_transaction_atm.first.is_withdrawal).to be true
     end
   end
+
   describe '#all_transaction_atm' do
     it 'returns all transaction ATMs' do
       transaction_atm_repository.add_transaction_atm(transaction_atm)
@@ -26,6 +28,7 @@ RSpec.describe 'TransactionATMRepository' do
       expect(transactions.first.is_withdrawal).to be true
     end
   end
+
   describe '#find_transaction_atm_by_id' do
     it 'finds a transaction ATM by ID' do
       transaction_atm_repository.add_transaction_atm(transaction_atm)
@@ -37,6 +40,7 @@ RSpec.describe 'TransactionATMRepository' do
       expect(transaction_atm_repository.find_transaction_atm_by_id(999)).to be_nil
     end
   end
+
   describe '#find_transaction_atm_by_id!' do
     it 'finds a transaction ATM by ID' do
       transaction_atm_repository.add_transaction_atm(transaction_atm)

@@ -12,6 +12,7 @@ RSpec.describe 'AccountRepository' do
       expect(account_repository.all_accounts.first.id).to eq(1)
     end
   end
+
   describe '#all_accounts' do
     it 'returns all accounts' do
       account_repository.add_account(account)
@@ -32,6 +33,7 @@ RSpec.describe 'AccountRepository' do
       expect(account_repository.find_account_by_id(999)).to be_nil
     end
   end
+
   describe '#find_account_by_id!' do
     it 'finds an account by ID' do
       account_repository.add_account(account)
@@ -43,6 +45,7 @@ RSpec.describe 'AccountRepository' do
       expect { account_repository.find_account_by_id!(999) }.to raise_error('Account not found')
     end
   end
+
   describe '#update_account' do
     it 'updates an existing account' do
       account_repository.add_account(account)
@@ -55,6 +58,7 @@ RSpec.describe 'AccountRepository' do
       expect { account_repository.update_account(2, { balance: 2000.0 }) }.to raise_error('Account not found')
     end
   end
+
   describe '#delete_account' do
     it 'deletes an existing account' do
       account_repository.add_account(account)
@@ -66,6 +70,7 @@ RSpec.describe 'AccountRepository' do
       expect { account_repository.delete_account(999) }.to raise_error('Account not found')
     end
   end
+
   describe '#clear' do
     it 'clears all accounts' do
       account_repository.add_account(account)

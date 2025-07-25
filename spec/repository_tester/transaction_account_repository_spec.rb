@@ -12,6 +12,7 @@ RSpec.describe 'TransactionAccountRepository' do
       expect(transaction_account_repository.all_transaction_accounts.first.amount).to eq(100.0)
     end
   end
+
   describe '#all_transaction_accounts' do
     it 'returns all transaction accounts' do
       transaction_account_repository.add_transaction_account(transaction_account)
@@ -23,6 +24,7 @@ RSpec.describe 'TransactionAccountRepository' do
       expect(transactions.first.receiver_id).to eq(2)
     end
   end
+
   describe '#find_transaction_account_by_id' do
     it 'finds a transaction account by ID' do
       transaction_account_repository.add_transaction_account(transaction_account)
@@ -34,6 +36,7 @@ RSpec.describe 'TransactionAccountRepository' do
       expect(transaction_account_repository.find_transaction_account_by_id(999)).to be_nil
     end
   end
+
   describe '#find_transaction_account_by_id!' do
     it 'finds a transaction account by ID' do
       transaction_account_repository.add_transaction_account(transaction_account)
