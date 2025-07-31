@@ -1,4 +1,5 @@
 require_relative '../repository/ATMs_repository'
+
 class ATMValidator
   def self.validate(atm)
     raise ValidationError, 'ATM ID cannot be nil or empty.' if atm.id.nil?

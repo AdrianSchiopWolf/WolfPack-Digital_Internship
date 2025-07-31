@@ -1,0 +1,118 @@
+<% content_for :styles do %>
+  <%= stylesheet_link_tag 'index', media: 'all' %>
+<% end %>
+
+<% content_for :scripts do %>
+  <%= javascript_include_tag 'index' %>
+<% end %>
+
+<header class="hb-header">
+  <div class="header-wrapper-top">
+      <div class="header-image-part">
+          <div class="header-top">
+          <div class="logo">
+              <%= image_tag 'logo.png', alt: 'Coffee Logo', class: 'logo-icon' %>
+              <div class="logo-text">
+              <span>Evrika</span>
+              <span>Caffee</span>
+              </div>
+              </div>
+              <nav class="navigation">
+
+                  <ul class="table-content">
+                      <li class>
+                          <button onclick="handleButtonClickNavigation('#')">HOME</button>
+                      </li>
+                      <p></p>
+                      <li>
+                          <button onclick="handleButtonClickNavigation('#')">ABOUT</button>
+                      </li>
+                      <p></p>
+                      <li>
+                          <button onclick="handleButtonClickNavigation('<%= dashboard_path %>')">SERVICE</button>
+                      </li>
+                      <p></p>
+                      <li>
+                          <button onclick="handleButtonClickNavigation('#')">BLOG</button>
+                      </li>
+                      <p></p>
+                      <li>
+                          <button onclick="handleButtonClickNavigation('#')">CONTACTS</button>
+                      </li>
+                  </ul>
+              </nav>
+              
+          </div>
+          <div class="header-bottom">
+              <h1 class="title">Ordering food</h1>
+              <div class="line-between">
+              <div class="zig-zag-line"></div>
+              <%= image_tag 'cutlery.png', alt: ':/', class: 'cutlery-icon' %>
+              <div class="zig-zag-line"></div>
+              </div>
+              <div class="under-line-text">
+                  <p>Maecenas vel tellus at magna sagittis. Integer pretium acuctor magna, egestas justo gravida vitae. In lacinia actor auctor</p>
+              </div>
+          </div>
+          </div>
+          
+      </div>
+      <div class="header-wrapper-bottom">
+          <nav class="navigation-bottom">
+              <ul class="table-content-bottom">
+                  <li>
+                      <div class="dropdown">
+                          <button onclick="toggleDropdown('dropdownMenu')" class="dropdown-button">Category</button>
+                          <div id="dropdownMenu" class="dropdown-content" >
+                              <div class="category-dropdown">
+                              <a href="#" data-category="Second Courses">Second Courses</a>
+                              <a href="#" data-category="Entrees">Entrees</a>
+                              <a href="#" data-category="Salads">Salads</a>
+                              <a href="#" data-category="All">All</a>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <li>
+                      <div class="dropdown">
+                          <button onclick="toggleDropdown('dropdownMenuSorting')" class="dropdown-button">Sorting</button>
+                          <div id="dropdownMenuSorting" class="dropdown-content" >
+                              <div class="sorting-dropdown">
+                                  <a href="#" data-sort="asc">Price: Low to High</a>
+                                  <a href="#" data-sort="desc">Price: High to Low</a>
+                                  <a href="#" data-sort="null">Popularity</a>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <li>
+                      <div class="dropdown">
+                          <button onclick="toggleDropdown('dropdownMenuVegetarian')" class="dropdown-button">Vegetarian</button>
+                          <div id="dropdownMenuVegetarian" class="dropdown-content" >
+                              <a href="#">Vegan</a>
+                              <a href="#">Vegetarian</a>
+                              
+                          </div>
+                      </div>
+                  </li>
+                  <li class="price-range-container">
+                      <span class="price-label">PRICE:</span>
+                      <span id="min-price">0$</span>
+                      <div class="range-slider">
+                          <input type="range" id="range-min" min="0" max="200" value="20">
+                          <input type="range" id="range-max" min="0" max="200" value="80">
+                          <div class="slider-track"></div>
+                      </div>
+                      <span id="max-price">200$</span>
+                  </li>
+              </ul>
+
+          </nav>
+      </div>
+  </div>
+</header>
+<div class="product-list-wrapper">
+  <section class="product-list" id="productList">
+
+  </section>
+</div>
