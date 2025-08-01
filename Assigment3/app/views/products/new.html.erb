@@ -45,7 +45,7 @@
     </div>
     <div>
       <%= form.label :photo, 'Photo:', required: true %>
-      <%= form.text_field :photo %>
+      <%= form.file_field :photo %>
     </div>
     <%= form.submit 'Add Product' %>
   <% end %>
@@ -55,8 +55,10 @@
       <div id="productsContainer">
         <% @products.each do |product| %>
           <div class="product-card">
-            <% if product.photo.present? %>
-              <%= image_tag product.photo, alt: "#{product.name} photo", class: 'product-photo' %>
+            <% if product.photo.attached? %>
+              <%= image_tag product.photo, alt: product.name, class: 'product-photo' %>
+            <% else %>
+              <%= image_tag 'placeholder.png', alt: 'No image', class: 'product-photo' %>
             <% end %>
             <h3><%= product.name %></h3>
             <p class="category">Category: <%= product.category %></p>

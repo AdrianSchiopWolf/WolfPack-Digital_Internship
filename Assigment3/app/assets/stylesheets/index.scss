@@ -186,6 +186,40 @@ $third-color: orange;
                 }
 
                 .dropdown {
+                    position: relative;
+                    display: inline-block;
+
+                    // Categories Select Box
+                    .dropdown-select {
+                        appearance: none;
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        background-color: transparent; // No box visible
+                        border: none; // No box visible
+                        padding: 10px 30px 10px 15px; // Adjusted left padding to 15px for centering
+                        border-radius: 6px;
+                        font-size: 16px;
+                        color: #000;
+                        cursor: pointer;
+                        outline: none;
+                        position: relative;
+                        // Custom arrow for select box (orange)
+                        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23FFA500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+                        background-repeat: no-repeat;
+                        background-position: right 10px center;
+                        background-size: 18px;
+
+                        &:hover {
+                            border-color: transparent; // Ensure no border on hover
+                        }
+
+                        &:focus {
+                            border-color: transparent; // Ensure no border on focus
+                            box-shadow: none; // Remove box-shadow on focus
+                        }
+                    }
+
+
 
                     .dropdown-button {
                         display: flex;
@@ -317,7 +351,25 @@ $third-color: orange;
                         }
                     }
                 }
+
+                .submit-button {
+                    background-color: #333;
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    margin-right: 20px;
+                    border: none;
+                    border-radius: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: background-color 0.2s ease;
+
+                    &:hover {
+                        background-color: #555;
+                    }
+                }
             }
+
+
         }
     }
 

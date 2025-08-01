@@ -57,32 +57,26 @@
           </div>
           
       </div>
-      <div class="header-wrapper-bottom">
+      <%= form_with url: products_path, method: :get, local: true, html: { class: 'header-wrapper-bottom' } do |f| %>
           <nav class="navigation-bottom">
               <ul class="table-content-bottom">
                   <li>
                       <div class="dropdown">
-                          <button onclick="toggleDropdown('dropdownMenu')" class="dropdown-button">Category</button>
-                          <div id="dropdownMenu" class="dropdown-content" >
-                              <div class="category-dropdown">
-                              <a href="#" data-category="Second Courses">Second Courses</a>
-                              <a href="#" data-category="Entrees">Entrees</a>
-                              <a href="#" data-category="Salads">Salads</a>
-                              <a href="#" data-category="All">All</a>
-                              </div>
-                          </div>
+                          <select name="category" class="dropdown-select">
+                            <option value="">CATEGORY</option>
+                            <option value="Second Courses" <%= 'selected' if params[:category] == 'Second Courses' %>>Second Courses</option>
+                            <option value="Entrees" <%= 'selected' if params[:category] == 'Entrees' %>>Entrees</option>
+                            <option value="Salads" <%= 'selected' if params[:category] == 'Salads' %>>Salads</option>
+                          </select>
                       </div>
                   </li>
                   <li>
                       <div class="dropdown">
-                          <button onclick="toggleDropdown('dropdownMenuSorting')" class="dropdown-button">Sorting</button>
-                          <div id="dropdownMenuSorting" class="dropdown-content" >
-                              <div class="sorting-dropdown">
-                                  <a href="#" data-sort="asc">Price: Low to High</a>
-                                  <a href="#" data-sort="desc">Price: High to Low</a>
-                                  <a href="#" data-sort="null">Popularity</a>
-                              </div>
-                          </div>
+                        <select name="sort" class="dropdown-select">
+                          <option value="">SORT BY</option>
+                          <option value="asc" <%= 'selected' if params[:sort] == 'asc' %>>Price: Low to High</option>
+                          <option value="desc" <%= 'selected' if params[:sort] == 'desc' %>>Price: High to Low</option>
+                        </select>
                       </div>
                   </li>
                   <li>
@@ -99,20 +93,40 @@
                       <span class="price-label">PRICE:</span>
                       <span id="min-price">0$</span>
                       <div class="range-slider">
-                          <input type="range" id="range-min" min="0" max="200" value="20">
-                          <input type="range" id="range-max" min="0" max="200" value="80">
-                          <div class="slider-track"></div>
+                        <input type="range" id="range-min" name="min_price" min="0" max="200" value="<%= params[:min_price] || 20 %>">
+                        <input type="range" id="range-max" name="max_price" min="0" max="200" value="<%= params[:max_price] || 80 %>">
+                        <div class="slider-track"></div>
                       </div>
                       <span id="max-price">200$</span>
                   </li>
+                  <li>
+                    <div class="form-submit">
+                        <%= f.submit 'Apply Filters', class: 'submit-button' %>
+                    </div>
+                  </li>
               </ul>
-
+              
           </nav>
-      </div>
+      <%end %>
   </div>
 </header>
 <div class="product-list-wrapper">
   <section class="product-list" id="productList">
-
+    <% if @products.any? %>
+      <% @products.each do |product| %>
+        <div class="product-card">
+          <% if product.photo.attached? %>
+            <%= image_tag product.photo, alt: product.name %>
+          <% else %>
+            <%= image_tag 'placeholder.png', alt: 'No image' %>
+          <% end %>
+          <h3><%= product.name %></h3>
+          <p class="category"><%= product.category %></p>
+          <p class="price">$<%= number_with_precision(product.price, precision: 2) %></p>
+          </div>
+      <% end %>
+    <% else %>
+      <p class="no-results">No products match your filters.</p>
+    <% end %>
   </section>
 </div>
