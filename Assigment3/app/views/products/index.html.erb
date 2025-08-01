@@ -2,10 +2,6 @@
   <%= stylesheet_link_tag 'index', media: 'all' %>
 <% end %>
 
-<% content_for :scripts do %>
-  <%= javascript_include_tag 'index' %>
-<% end %>
-
 <header class="hb-header">
   <div class="header-wrapper-top">
       <div class="header-image-part">
@@ -57,12 +53,12 @@
           </div>
           
       </div>
-      <%= form_with url: products_path, method: :get, local: true, html: { class: 'header-wrapper-bottom' } do |f| %>
+      <%= form_with url: products_path, method: :get, local: true, html: { class: 'header-wrapper-bottom', data: { controller: 'filter', filter_target: 'form' } } do |f| %>
           <nav class="navigation-bottom">
               <ul class="table-content-bottom">
                   <li>
                       <div class="dropdown">
-                          <select name="category" class="dropdown-select">
+                          <select name="category" class="dropdown-select" data-action="change->filter#submit">
                             <option value="">CATEGORY</option>
                             <option value="Second Courses" <%= 'selected' if params[:category] == 'Second Courses' %>>Second Courses</option>
                             <option value="Entrees" <%= 'selected' if params[:category] == 'Entrees' %>>Entrees</option>
@@ -72,7 +68,7 @@
                   </li>
                   <li>
                       <div class="dropdown">
-                        <select name="sort" class="dropdown-select">
+                        <select name="sort" class="dropdown-select" data-action="change->filter#submit">
                           <option value="">SORT BY</option>
                           <option value="asc" <%= 'selected' if params[:sort] == 'asc' %>>Price: Low to High</option>
                           <option value="desc" <%= 'selected' if params[:sort] == 'desc' %>>Price: High to Low</option>
@@ -91,18 +87,13 @@
                   </li>
                   <li class="price-range-container">
                       <span class="price-label">PRICE:</span>
-                      <span id="min-price">0$</span>
+                      <span id="min-price" data-filter-target="minPrice">0$</span>
                       <div class="range-slider">
-                        <input type="range" id="range-min" name="min_price" min="0" max="200" value="<%= params[:min_price] || 20 %>">
-                        <input type="range" id="range-max" name="max_price" min="0" max="200" value="<%= params[:max_price] || 80 %>">
-                        <div class="slider-track"></div>
+                        <input type="range" id="range-min" name="min_price" min="0" max="200" value="<%= params[:min_price] || 20 %>" data-action="input->filter#submit" data-filter-target="rangeMin">
+                        <input type="range" id="range-max" name="max_price" min="0" max="200" value="<%= params[:max_price] || 80 %>" data-action="input->filter#submit" data-filter-target="rangeMax">
+                        <div class="slider-track" data-filter-target="sliderTrack"></div>
                       </div>
-                      <span id="max-price">200$</span>
-                  </li>
-                  <li>
-                    <div class="form-submit">
-                        <%= f.submit 'Apply Filters', class: 'submit-button' %>
-                    </div>
+                      <span id="max-price" data-filter-target="maxPrice">200$</span>
                   </li>
               </ul>
               

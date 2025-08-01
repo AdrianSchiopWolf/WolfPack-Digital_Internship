@@ -13,16 +13,11 @@ class ProductsController < ApplicationController
       end
     end
 
-    if params[:min_price].present? && params[:max_price].present?
-      min_price = params[:min_price].to_f
-      max_price = params[:max_price].to_f
-      @products = @products.where(price: min_price..max_price)
-    end
+    return unless params[:min_price].present? && params[:max_price].present?
 
-    respond_to do |format|
-      format.html
-      format.json { render json: @products }
-    end
+    min_price = params[:min_price].to_f
+    max_price = params[:max_price].to_f
+    @products = @products.where(price: min_price..max_price)
   end
 
   def new
