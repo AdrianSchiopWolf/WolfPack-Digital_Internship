@@ -1,23 +1,11 @@
 class ProductsController < ApplicationController
+  skip_before_action :require_login!, only: [:index]
+  
   def index
     @products = Product.all
-
-    @products = @products.where(category: params[:category]) if params[:category].present? && params[:category] != 'All'
-
-    if params[:sort].present?
-      puts "Sorting products by price in #{params[:sort]} order"
-      if params[:sort] == 'asc'
-        @products = @products.order(price: :asc)
-      elsif params[:sort] == 'desc'
-        @products = @products.order(price: :desc)
-      end
-    end
-
-    return unless params[:min_price].present? && params[:max_price].present?
-
-    min_price = params[:min_price].to_f
-    max_price = params[:max_price].to_f
-    @products = @products.where(price: min_price..max_price)
+    filter_by_category
+    filter_by_price
+    sort_products
   end
 
   def new
@@ -35,6 +23,8 @@ class ProductsController < ApplicationController
     end
   end
 
+  private
+
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
@@ -42,6 +32,28 @@ class ProductsController < ApplicationController
   end
 
   private
+
+  def filter_by_category
+    @products = @products.where(category: params[:category]) if params[:category].present? && params[:category] != 'All'
+  end
+
+  def filter_by_price
+    return unless params[:min_price].present? && params[:max_price].present?
+
+    min_price = params[:min_price].to_f
+    max_price = params[:max_price].to_f
+    @products = @products.where(price: min_price..max_price)
+  end
+
+  def sort_products
+    if params[:sort].present?
+      if params[:sort] == 'asc'
+        @products = @products.order(price: :asc)
+      elsif params[:sort] == 'desc'
+        @products = @products.order(price: :desc)
+      end
+    end
+  end
 
   def product_params
     params.require(:product).permit(:name, :price, :category, :photo)

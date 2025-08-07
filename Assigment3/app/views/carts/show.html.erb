@@ -1,0 +1,23 @@
+<% content_for :styles do %>
+  <%= stylesheet_link_tag 'index', media: 'all' %>
+<% end %>
+
+<% content_for :header_title do %>
+  <%= current_user.username %>'s Cart
+<% end %>
+<div class="product-list-wrapper">
+  <section class="product-list" id="productList">
+    <div id="productsContainer">
+        <% if @cart_items.any? %>
+            <% @cart_items.each do |item| %>
+                <%= render partial: 'products/products_cards', locals: { product: item.product, 
+                                                                        show_delete_button: false, 
+                                                                        show_add_to_cart_button: false, 
+                                                                        show_remove_button: true,
+                                                                        item: item } %>
+
+            <% end %>
+        <% end %>
+    </div>
+  </section>
+</div>

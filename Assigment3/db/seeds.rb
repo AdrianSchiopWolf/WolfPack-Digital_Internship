@@ -7,4 +7,4 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-Product.where(photo: 'carbonara.pbg').destroy_all
+Users.drop_table :users, if_exists: true

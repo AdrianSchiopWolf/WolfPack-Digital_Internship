@@ -1,6 +1,4 @@
-$pimary-color: #FFF;
-$font-stack: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-$shadow-color: rgba(0, 0, 0, 0.2);
+@import 'variables';
 
 .hb-header {
     display: flex;
@@ -8,7 +6,7 @@ $shadow-color: rgba(0, 0, 0, 0.2);
 
     .header-wrapper-top {
         height: 55vh;
-        background-image: url('/background.png');
+        background-image: url('background.png');
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
@@ -213,6 +211,26 @@ $shadow-color: rgba(0, 0, 0, 0.2);
                 &:hover {
                     transform: scale(1.1);
                     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                }
+                .delete-button {
+                    padding: 10px 20px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: #fff;
+                    background-color: red;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+
+                    &:hover {
+                        background-color: darken(red, 10%);
+                    }
+                }
+
+                &:hover {
+                    transform: scale(1.1);
+                    box-shadow: 0 4px 10px $shadow-color;
                 }
             }
         }
