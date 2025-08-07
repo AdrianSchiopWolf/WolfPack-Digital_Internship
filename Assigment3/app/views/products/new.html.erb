@@ -2,29 +2,9 @@
   <%= stylesheet_link_tag 'dashboard', media: 'all' %>
 <% end %>
 
-<header class="hb-header">
-  <div class="header-wrapper-top">
-    <div class="header-image-part">
-      <div class="header-top">
-        <div class="logo" onclick="window.location.href='<%= root_path %>'">
-          <%= image_tag 'logo.png', alt: 'Coffee Logo', class: 'logo-icon' %>
-          <div class="logo-text">
-          <span>Evrika</span>
-          <span>Caffee</span>
-          </div>
-        </div>
-      </div>
-      <div class="header-bottom">
-        <h1 class="title">Dashboard</h1>
-        <div class="line-between">
-        <div class="zig-zag-line"></div>
-        <%= image_tag 'cutlery.png', alt: ':/', class: 'cutlery-icon' %>
-        <div class="zig-zag-line"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
+<% content_for :header_title do %>
+  Dashboard
+<% end %>
 <main class="product-section">
 
   <%= form_with model: @product, local: true, html:{ class: 'product-form__form' } do |form| %>
@@ -51,17 +31,7 @@
       <h2>Product List</h2>
       <div id="productsContainer">
         <% @products.each do |product| %>
-          <div class="product-card">
-            <% if product.photo.attached? %>
-              <%= image_tag product.photo, alt: product.name, class: 'product-photo' %>
-            <% else %>
-              <%= image_tag 'placeholder.png', alt: 'No image', class: 'product-photo' %>
-            <% end %>
-            <h3><%= product.name %></h3>
-            <p class="category">Category: <%= product.category %></p>
-            <p class="price">Price: $<%= product.price %></p>
-            <%= link_to 'Delete', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-button' %>
-          </div>
+          <%= render partial: 'products/products_cards', locals: { product: product, show_delete_button: true, show_add_to_cart_button: false, show_remove_button: false } %>
         <% end %>
       </div>
   </section>

@@ -7,11 +7,47 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= yield :styles %>
-    <%= stylesheet_link_tag "application", media: "all" %>
+
     <%= javascript_include_tag "application", defer: true %>
   </head>
 
   <body>
+    <header class="hb-header">
+      <div class="header-wrapper-top">
+        <div class="header-image-part">
+          <div class="header-top">
+            <div class="logo" onclick="window.location.href='<%= root_path %>'">
+              <%= image_tag 'logo.png', alt: 'Coffee Logo', class: 'logo-icon' %>
+              <div class="logo-text">
+                <span>Evrika</span>
+                <span>Caffee</span>
+              </div>
+            </div>
+              <%= yield :navigation %>
+          </div>
+
+          <div class="header-bottom">
+            <h1 class="title"><%= content_for?(:header_title) ? yield(:header_title) : "Welcome" %></h1>
+
+            <div class="line-between">
+              <div class="zig-zag-line"></div>
+              <%= image_tag 'cutlery.png', alt: ':/', class: 'cutlery-icon' %>
+              <div class="zig-zag-line"></div>
+            </div>
+
+            <% if content_for?(:header_subtext) %>
+              <div class="under-line-text">
+                <%= yield :header_subtext %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        
+      </div>
+      <% if content_for?(:filter) %>
+          <%= yield :filter %>
+      <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,43 @@
+<nav class="navigation">
+    <ul class="table-content">
+        <li class>
+            <button onclick="handleButtonClickNavigation('#')" class='nav-btn'>HOME</button>
+        </li>
+        <p class='point'></p>
+        <li>
+            <button onclick="handleButtonClickNavigation('#')" class='nav-btn'>ABOUT</button>
+        </li>
+        <p class='point'></p>
+        <li>
+            <button onclick="handleButtonClickNavigation('<%= dashboard_path %>')" class='nav-btn'>SERVICE</button>
+        </li>
+        <p class='point'></p>
+        <li>
+            <button onclick="handleButtonClickNavigation('#')" class='nav-btn'>BLOG</button>
+        </li>
+        <p class='point'></p>
+        <li>
+            <button onclick="handleButtonClickNavigation('#')" class='nav-btn'>CONTACTS</button>
+        </li>
+        <% unless logged_in? %>
+            <p class='point'></p>
+            <li>
+                <button onclick="handleButtonClickNavigation('<%= login_path %>')" class='nav-btn'>LOG IN</button>
+            </li>
+            <p class='point'></p>
+            <li>
+                <button onclick="handleButtonClickNavigation('<%= new_user_path %>')" class='nav-btn'>SIGN UP</button>
+            </li>
+        <% else %>
+            <p class='point'></p>
+            <li class="account-dropdown">
+                <button class="dropdown-toggle">ACCOUNT</button>
+                    <div class="dropdown-menu">
+                    <p class="username-display"><%= current_user.username %></p>
+                    <%= link_to "Cart", shopping_cart_path, class: "dropdown-item" %>
+                    <%= button_to "Log Out", logout_path, method: :delete, class: "dropdown-item logout-btn", form: { style: "display:inline;" } %>
+                </div>
+            </li>
+        <% end %>
+    </ul>
+</nav>
