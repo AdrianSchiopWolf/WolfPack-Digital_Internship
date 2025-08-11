@@ -1,32 +1,32 @@
 <nav class="navigation">
     <ul class="table-content">
         <li class>
-            <button onclick="handleButtonClickNavigation('#')" class='nav-btn'>HOME</button>
+            <%= link_to 'HOME', root_path, class: 'nav-btn' %>
         </li>
         <p class='point'></p>
         <li>
-            <button onclick="handleButtonClickNavigation('#')" class='nav-btn'>ABOUT</button>
+            <%= link_to 'ABOUT', '#', class: 'nav-btn' %>
         </li>
         <p class='point'></p>
         <li>
-            <button onclick="handleButtonClickNavigation('<%= dashboard_path %>')" class='nav-btn'>SERVICE</button>
+            <%= link_to 'SERVICE', dashboard_path, class: 'nav-btn' %>
         </li>
         <p class='point'></p>
         <li>
-            <button onclick="handleButtonClickNavigation('#')" class='nav-btn'>BLOG</button>
+            <%= link_to 'BLOG', '#', class: 'nav-btn' %>
         </li>
         <p class='point'></p>
         <li>
-            <button onclick="handleButtonClickNavigation('#')" class='nav-btn'>CONTACTS</button>
+            <%= link_to 'CONTACTS', '#', class: 'nav-btn' %>
         </li>
         <% unless logged_in? %>
             <p class='point'></p>
             <li>
-                <button onclick="handleButtonClickNavigation('<%= login_path %>')" class='nav-btn'>LOG IN</button>
+                <%= link_to 'LOG IN', login_path, class: 'nav-btn' %>
             </li>
             <p class='point'></p>
             <li>
-                <button onclick="handleButtonClickNavigation('<%= new_user_path %>')" class='nav-btn'>SIGN UP</button>
+                <%= link_to 'SIGN UP', new_user_path, class: 'nav-btn' %>
             </li>
         <% else %>
             <p class='point'></p>

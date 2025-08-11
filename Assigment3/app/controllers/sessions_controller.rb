@@ -2,8 +2,7 @@ class SessionsController < ApplicationController
   layout 'authenticated'
   skip_before_action :require_login!, only: [:new, :create]
 
-  def new
-  end
+  def new; end
 
   def create
     user = User.find_by(email: params[:email])

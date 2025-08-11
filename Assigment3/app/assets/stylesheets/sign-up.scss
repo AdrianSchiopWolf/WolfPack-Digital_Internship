@@ -1,10 +1,4 @@
-// Variables
-$primary-color: #007bff;
-$background-color: #f8f9fa;
-$form-bg: rgba(255, 255, 255, 0.85); // translucent white
-$border-radius: 12px;
-$input-padding: 14px;
-$box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+@import "variables";
 
 .sign-up-container {
   display: flex;
@@ -50,9 +44,9 @@ $box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
       transition: all 0.25s ease;
     ;
       &:focus {
-        border-color: $primary-color;
+        border-color: $primary-color-login;
         outline: none;
-        box-shadow: 0 0 0 3px rgba($primary-color, 0.25);
+        box-shadow: 0 0 0 3px rgba($primary-color-login, 0.25);
       }
     }
   }
@@ -77,24 +71,24 @@ $box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
         color: inherit;
       }
       &.btn-primary {
-        background-color: $primary-color;
+        background-color: $primary-color-login;
         color: #fff;
 
         &:hover {
-          background-color: darken($primary-color, 8%);
+          background-color: darken($primary-color-login, 8%);
           transform: translateY(-1px);
           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
       }
       &.btn-secondary {
-        background-color: $primary-color;
+        background-color: $primary-color-login;
         color: #fff;
         width: auto;
         height: 5%;
         text-align: center;
         font-weight: bold;
         &:hover {
-          background-color: darken($primary-color, 8%);
+          background-color: darken($primary-color-login, 8%);
           transform: translateY(-1px);
           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }

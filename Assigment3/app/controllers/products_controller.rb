@@ -6,6 +6,10 @@ class ProductsController < ApplicationController
     filter_by_category
     filter_by_price
     sort_products
+    respond_to do |format|
+      format.html # index.html.erb
+      format.turbo_stream { render partial: 'products/products_list', locals: { products: @products } }
+    end
   end
 
   def new
@@ -46,13 +50,7 @@ class ProductsController < ApplicationController
   end
 
   def sort_products
-    if params[:sort].present?
-      if params[:sort] == 'asc'
-        @products = @products.order(price: :asc)
-      elsif params[:sort] == 'desc'
-        @products = @products.order(price: :desc)
-      end
-    end
+    @products = @products.order(price: params[:sort]) if %w[asc desc].include?(params[:sort])
   end
 
   def product_params

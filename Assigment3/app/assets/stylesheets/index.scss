@@ -55,13 +55,14 @@
 
                 .navigation {
                     padding-right: 200px;
-                    padding-top: 10px;
+                    padding-top: 30px;
 
                     .table-content {
                         display: flex;
                         flex-flow: row wrap;
                         align-items: center;
                         list-style-type: none;
+
 
                         .point {
                             bottom: -8px;
@@ -80,12 +81,14 @@
                             margin: 0px;
 
                             .nav-btn {
-                                font-size: 80%;
+                                font-size: 100%;
                                 background: none;
                                 padding: 10px 20px;
                                 cursor: pointer;
                                 color: #FFF;
-                                border: 0;
+                                text-decoration: none;
+                                font-family: $font-stack;
+                                
                             }
                         }
                     }
@@ -434,19 +437,31 @@
                     box-shadow: 0 4px 10px $shadow-color;
                 }
 
-                .remove-button {
-                    padding: 10px 20px;
-                    font-size: 14px;
-                    font-weight: bold;
-                    color: #fff;
-                    background-color: red;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    transition: background-color 0.3s ease;
+                .cart-quantity-controls {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    margin-top: 10px;
+                    padding-bottom: 10px;
 
-                    &:hover {
-                        background-color: darken(red, 10%);
+                    .quantity {
+                        padding: 5px 10px;
+                        font-size: 14px;
+                        font-weight: bold;
+                        color: #fff;
+                        background-color: $third-color;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: darken($third-color, 10%);
+                        }
+                    }
+
+                    .quantity-display {
+                        font-size: 16px;
+                        font-weight: bold;
                     }
                 }
             }

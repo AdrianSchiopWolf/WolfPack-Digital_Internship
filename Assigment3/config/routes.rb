@@ -6,7 +6,11 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create]
 
-  resources :carts, only: [:index, :create, :destroy]
+  resources :carts, only: [:index, :create, :destroy] do
+    member do
+      patch :update_quantity
+    end
+  end
 
   resource :shopping_cart, controller: 'carts', only: [:show]
   get '/dashboard', to: 'products#new', as: :dashboard

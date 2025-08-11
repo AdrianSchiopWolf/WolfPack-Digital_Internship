@@ -1,4 +1,4 @@
-<%= form_with url: products_path, method: :get, local: true, html: { class: 'header-wrapper-bottom', data: { controller: 'filter', filter_target: 'form' } } do |f| %>
+<%= form_with url: products_path, method: :get, data: { controller: 'filter', filter_target: 'form', turbo_frame: 'products' }, html: { class: 'header-wrapper-bottom' } do |f| %>
     <nav class="navigation-bottom">
         <ul class="table-content-bottom">
             <li>
