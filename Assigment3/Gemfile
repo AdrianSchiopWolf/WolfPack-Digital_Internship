@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 ruby '3.2.2'
@@ -69,8 +71,10 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-gem "cloudinary", "~> 2.3"
+gem 'cloudinary', '~> 2.3'
 
-gem "activestorage-cloudinary-service", "~> 0.2.3"
+gem 'activestorage-cloudinary-service', '~> 0.2.3'
 
-gem "dotenv-rails", "~> 3.1"
+gem 'dotenv-rails', '~> 3.1'
+
+gem 'tailwindcss-rails', '~> 4.3'

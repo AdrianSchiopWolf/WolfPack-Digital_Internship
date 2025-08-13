@@ -1,4 +1,6 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class CartsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -6,7 +8,7 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
     @product = products(:product_two)
   end
 
-  test "authenticated user can add product to cart" do
+  test 'authenticated user can add product to cart' do
     post login_path, params: { email: @user.email, password: 'password' }
 
     assert_difference -> { @user.cart_items.count }, 1 do
@@ -17,12 +19,11 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
-  test "unauthenticated user cannot add product to cart" do
+  test 'unauthenticated user cannot add product to cart' do
     assert_no_difference 'Cart.count' do
       post carts_path, params: { product_id: @product.id }
     end
 
-      assert_redirected_to login_path
+    assert_redirected_to login_path
   end
-
 end

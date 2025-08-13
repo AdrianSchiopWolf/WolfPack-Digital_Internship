@@ -1,14 +1,18 @@
+# frozen_string_literal: true
+
 class ProductsController < ApplicationController
   skip_before_action :require_login!, only: [:index]
-  
+
   def index
     @products = Product.all
     filter_by_category
     filter_by_price
     sort_products
-    respond_to do |format|
-      format.html # index.html.erb
-      format.turbo_stream { render partial: 'products/products_list', locals: { products: @products } }
+
+    if turbo_frame_request?
+      render partial: 'list_products', locals: { products: @products, is_dash: false }
+    else
+      render :index
     end
   end
 
@@ -27,8 +31,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  private
-
+  
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
@@ -36,6 +39,7 @@ class ProductsController < ApplicationController
   end
 
   private
+
 
   def filter_by_category
     @products = @products.where(category: params[:category]) if params[:category].present? && params[:category] != 'All'

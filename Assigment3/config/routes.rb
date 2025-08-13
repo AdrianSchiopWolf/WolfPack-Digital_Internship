@@ -1,12 +1,13 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   root 'products#index'
 
-  resources :products, only: [:index, :new, :create, :destroy]
+  resources :products, only: %i[index new create destroy]
 
-  resources :users, only: [:new, :create]
+  resources :users, only: %i[new create]
 
-  resources :carts, only: [:index, :create, :destroy] do
+  resources :carts, only: %i[index create destroy] do
     member do
       patch :update_quantity
     end
