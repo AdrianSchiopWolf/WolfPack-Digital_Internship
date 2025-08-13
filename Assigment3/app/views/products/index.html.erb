@@ -2,122 +2,38 @@
   <%= stylesheet_link_tag 'index', media: 'all' %>
 <% end %>
 
-<header class="hb-header">
-  <div class="header-wrapper-top">
-      <div class="header-image-part">
-          <div class="header-top">
-          <div class="logo">
-              <%= image_tag 'logo.png', alt: 'Coffee Logo', class: 'logo-icon' %>
-              <div class="logo-text">
-              <span>Evrika</span>
-              <span>Caffee</span>
-              </div>
-              </div>
-              <nav class="navigation">
+<% content_for :navigation do %>
+    <%= render partial: 'products/navigation' %>
+<% end %>
 
-                  <ul class="table-content">
-                      <li class>
-                          <button onclick="handleButtonClickNavigation('#')">HOME</button>
-                      </li>
-                      <p></p>
-                      <li>
-                          <button onclick="handleButtonClickNavigation('#')">ABOUT</button>
-                      </li>
-                      <p></p>
-                      <li>
-                          <button onclick="handleButtonClickNavigation('<%= dashboard_path %>')">SERVICE</button>
-                      </li>
-                      <p></p>
-                      <li>
-                          <button onclick="handleButtonClickNavigation('#')">BLOG</button>
-                      </li>
-                      <p></p>
-                      <li>
-                          <button onclick="handleButtonClickNavigation('#')">CONTACTS</button>
-                      </li>
-                  </ul>
-              </nav>
-              
-          </div>
-          <div class="header-bottom">
-              <h1 class="title">Ordering food</h1>
-              <div class="line-between">
-              <div class="zig-zag-line"></div>
-              <%= image_tag 'cutlery.png', alt: ':/', class: 'cutlery-icon' %>
-              <div class="zig-zag-line"></div>
-              </div>
-              <div class="under-line-text">
-                  <p>Maecenas vel tellus at magna sagittis. Integer pretium acuctor magna, egestas justo gravida vitae. In lacinia actor auctor</p>
-              </div>
-          </div>
-          </div>
-          
-      </div>
-      <%= form_with url: products_path, method: :get, local: true, html: { class: 'header-wrapper-bottom', data: { controller: 'filter', filter_target: 'form' } } do |f| %>
-          <nav class="navigation-bottom">
-              <ul class="table-content-bottom">
-                  <li>
-                      <div class="dropdown">
-                          <select name="category" class="dropdown-select" data-action="change->filter#submit">
-                            <option value="">CATEGORY</option>
-                            <option value="Second Courses" <%= 'selected' if params[:category] == 'Second Courses' %>>Second Courses</option>
-                            <option value="Entrees" <%= 'selected' if params[:category] == 'Entrees' %>>Entrees</option>
-                            <option value="Salads" <%= 'selected' if params[:category] == 'Salads' %>>Salads</option>
-                          </select>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="dropdown">
-                        <select name="sort" class="dropdown-select" data-action="change->filter#submit">
-                          <option value="">SORT BY</option>
-                          <option value="asc" <%= 'selected' if params[:sort] == 'asc' %>>Price: Low to High</option>
-                          <option value="desc" <%= 'selected' if params[:sort] == 'desc' %>>Price: High to Low</option>
-                        </select>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="dropdown">
-                          <button onclick="toggleDropdown('dropdownMenuVegetarian')" class="dropdown-button">Vegetarian</button>
-                          <div id="dropdownMenuVegetarian" class="dropdown-content" >
-                              <a href="#">Vegan</a>
-                              <a href="#">Vegetarian</a>
-                              
-                          </div>
-                      </div>
-                  </li>
-                  <li class="price-range-container">
-                      <span class="price-label">PRICE:</span>
-                      <span id="min-price" data-filter-target="minPrice">0$</span>
-                      <div class="range-slider">
-                        <input type="range" id="range-min" name="min_price" min="0" max="200" value="<%= params[:min_price] || 20 %>" data-action="input->filter#submit" data-filter-target="rangeMin">
-                        <input type="range" id="range-max" name="max_price" min="0" max="200" value="<%= params[:max_price] || 80 %>" data-action="input->filter#submit" data-filter-target="rangeMax">
-                        <div class="slider-track" data-filter-target="sliderTrack"></div>
-                      </div>
-                      <span id="max-price" data-filter-target="maxPrice">200$</span>
-                  </li>
-              </ul>
-              
-          </nav>
-      <%end %>
+<% content_for :header_title do %>
+  Ordering food
+<% end %>
+
+<% content_for :header_subtext do %>
+  <p>Maecenas vel tellus at magna sagittis. Integer pretium auctor magna, egestas justo gravida vitae. In lacinia actor auctor.</p>
+<% end %>
+
+<% content_for :filter do %>
+  <div class="header-wrapper-bottom">
+    <%= render partial: 'products/filter_products', locals: { products: @products } %>
   </div>
-</header>
-<div class="product-list-wrapper">
-  <section class="product-list" id="productList">
-    <% if @products.any? %>
-      <% @products.each do |product| %>
-        <div class="product-card">
-          <% if product.photo.attached? %>
-            <%= image_tag product.photo, alt: product.name %>
-          <% else %>
-            <%= image_tag 'placeholder.png', alt: 'No image' %>
+<% end %>
+
+<turbo-frame id="products">
+  <div class="product-list-wrapper">
+    <section class="product-list" id="productList">
+      <div id="productsContainer">
+          <% if @products.any? %>
+              <% @products.each do |product| %>
+                  <%= render partial: 'products/products_cards', locals: { product: product, 
+                                                                          show_delete_button: false, 
+                                                                          show_add_to_cart_button: true, 
+                                                                          show_remove_button: false} 
+                  %>
+              <% end %>
           <% end %>
-          <h3><%= product.name %></h3>
-          <p class="category"><%= product.category %></p>
-          <p class="price">$<%= number_with_precision(product.price, precision: 2) %></p>
-          </div>
-      <% end %>
-    <% else %>
-      <p class="no-results">No products match your filters.</p>
-    <% end %>
-  </section>
-</div>
+      </div>
+    </section>
+  </div>
+</turbo-frame>

@@ -1,0 +1,43 @@
+<nav class="navigation">
+    <ul class="table-content">
+        <li class>
+            <%= link_to 'HOME', root_path, class: 'nav-btn' %>
+        </li>
+        <p class='point'></p>
+        <li>
+            <%= link_to 'ABOUT', '#', class: 'nav-btn' %>
+        </li>
+        <p class='point'></p>
+        <li>
+            <%= link_to 'SERVICE', dashboard_path, class: 'nav-btn' %>
+        </li>
+        <p class='point'></p>
+        <li>
+            <%= link_to 'BLOG', '#', class: 'nav-btn' %>
+        </li>
+        <p class='point'></p>
+        <li>
+            <%= link_to 'CONTACTS', '#', class: 'nav-btn' %>
+        </li>
+        <% unless logged_in? %>
+            <p class='point'></p>
+            <li>
+                <%= link_to 'LOG IN', login_path, class: 'nav-btn' %>
+            </li>
+            <p class='point'></p>
+            <li>
+                <%= link_to 'SIGN UP', new_user_path, class: 'nav-btn' %>
+            </li>
+        <% else %>
+            <p class='point'></p>
+            <li class="account-dropdown">
+                <button class="dropdown-toggle">ACCOUNT</button>
+                    <div class="dropdown-menu">
+                    <p class="username-display"><%= current_user.username %></p>
+                    <%= link_to "Cart", shopping_cart_path, class: "dropdown-item" %>
+                    <%= button_to "Log Out", logout_path, method: :delete, class: "dropdown-item logout-btn", form: { style: "display:inline;" } %>
+                </div>
+            </li>
+        <% end %>
+    </ul>
+</nav>

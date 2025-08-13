@@ -1,0 +1,36 @@
+<%= form_with url: products_path, method: :get, data: { controller: 'filter', filter_target: 'form', turbo_frame: 'products' }, html: { class: 'header-wrapper-bottom' } do |f| %>
+    <nav class="navigation-bottom">
+        <ul class="table-content-bottom">
+            <li>
+                <div class="dropdown">
+                    <%= select_tag "category", options_for_select(["All", "Second Courses", "Entrees", "Salads"], params[:category]), { class: "dropdown-select", prompt: "CATEGORY", data: { action: "change->filter#submit" } } %>
+                </div>
+            </li>
+            <li>
+                <div class="dropdown">
+                <%= select_tag "sort", options_for_select([["Price: Low to High", "asc"], ["Price: High to Low", "desc"]], params[:sort]), { class: "dropdown-select", prompt: "SORT BY", data: { action: "change->filter#submit" } } %>
+                </div>
+            </li>
+            <li>
+                <div class="dropdown">
+                    <button onclick="toggleDropdown('dropdownMenuVegetarian')" class="dropdown-button">Vegetarian</button>
+                    <div id="dropdownMenuVegetarian" class="dropdown-content" >
+                        <a href="#">Vegan</a>
+                        <a href="#">Vegetarian</a>
+                        
+                    </div>
+                </div>
+            </li>
+            <li class="price-range-container">
+                <span class="price-label">PRICE:</span>
+                <span id="min-price" data-filter-target="minPrice">0$</span>
+                <div class="range-slider">
+                <input type="range" id="range-min" name="min_price" min="0" max="200" value="<%= params[:min_price] || 20 %>" data-action="input->filter#submit" data-filter-target="rangeMin">
+                <input type="range" id="range-max" name="max_price" min="0" max="200" value="<%= params[:max_price] || 80 %>" data-action="input->filter#submit" data-filter-target="rangeMax">
+                <div class="slider-track" data-filter-target="sliderTrack"></div>
+                </div>
+                <span id="max-price" data-filter-target="maxPrice">200$</span>
+            </li>
+        </ul>
+    </nav>
+<%end %>
