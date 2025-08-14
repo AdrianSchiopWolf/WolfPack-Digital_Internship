@@ -29,6 +29,12 @@
                 <%= link_to 'SIGN UP', new_user_path, class: 'nav-btn' %>
             </li>
         <% else %>
+             <% if current_user.admin? %>
+                <p class='point'></p>
+                <li>
+                    <%= link_to 'ADMIN DASHBOARD', admin_orders_path, class: 'nav-btn' %>
+                </li>
+            <% end %>
             <p class='point'></p>
             <li class="account-dropdown">
                 <button class="dropdown-toggle">ACCOUNT</button>
@@ -38,6 +44,7 @@
                     <%= button_to "Log Out", logout_path, method: :delete, class: "dropdown-item logout-btn", form: { style: "display:inline;" } %>
                 </div>
             </li>
+
         <% end %>
     </ul>
 </nav>

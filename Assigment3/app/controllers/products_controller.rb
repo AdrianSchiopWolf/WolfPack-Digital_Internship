@@ -31,7 +31,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
@@ -39,7 +38,6 @@ class ProductsController < ApplicationController
   end
 
   private
-
 
   def filter_by_category
     @products = @products.where(category: params[:category]) if params[:category].present? && params[:category] != 'All'

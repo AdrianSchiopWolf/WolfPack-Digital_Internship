@@ -22,5 +22,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: :logout
 
-  # Add any additional routes here
+  post '/checkout', to: 'orders#create', as: :checkout
+
+  namespace :admin do
+    resources :orders, only: %i[index update]
+  end
 end

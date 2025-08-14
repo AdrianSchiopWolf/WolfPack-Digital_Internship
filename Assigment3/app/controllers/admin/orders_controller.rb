@@ -2,9 +2,10 @@
 
 module Admin
   class OrdersController < Admin::BaseController
+    layout 'admin_dashboard'
     def index
-      @orders = Order.all.includes(:user, :order_items)
-      render 'order/index'
+      @orders = Order.all.includes(:user, order_items: :product).order(created_at: :desc)
+      render 'orders/index'
     end
 
     def update

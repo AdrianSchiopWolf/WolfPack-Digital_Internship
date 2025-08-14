@@ -6,11 +6,18 @@
     <div id="productsContainer">
         <% if @products.any? %>
             <% @products.each do |product| %>
+                <% unless is_dash %>
                 <%= render partial: 'products/products_cards', locals: { product: product, 
                                                                         show_delete_button: false, 
                                                                         show_add_to_cart_button: true, 
                                                                         show_remove_button: false} 
                 %>
+                <% else %>
+                <%= render partial: 'products/products_cards', locals: { product: product, 
+                                                                        show_delete_button: true, 
+                                                                        show_add_to_cart_button: false, 
+                                                                        show_remove_button: false } %>
+                <% end %>                                                 
             <% end %>
         <% end %>
     </div>

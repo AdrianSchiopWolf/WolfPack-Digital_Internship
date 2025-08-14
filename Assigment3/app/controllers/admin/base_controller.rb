@@ -1,9 +1,13 @@
-class Admin::BaseController < ApplicationController
-  before_action :require_admin!
+# frozen_string_literal: true
 
-  private
+module Admin
+  class BaseController < ApplicationController
+    before_action :require_admin!
 
-  def require_admin!
-    redirect_to root_path, alert: 'You must be an admin to access this section.' unless current_user&.admin?
+    private
+
+    def require_admin!
+      redirect_to root_path, alert: 'You must be an admin to access this section.' unless current_user&.admin?
+    end
   end
 end
