@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 # lib/tasks/migrate_to_cloudinary.rake
 namespace :active_storage do
-  desc "Re-upload all existing ActiveStorage files to Cloudinary"
+  desc 'Re-upload all existing ActiveStorage files to Cloudinary'
   task migrate_to_cloudinary: :environment do
     ActiveStorage::Blob.find_each do |blob|
       next if blob.service_name == 'cloudinary'

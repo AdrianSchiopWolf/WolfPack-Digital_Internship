@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CartsController < ApplicationController
-  def index;end
+  def index; end
 
   def show
     @cart_items = current_user.cart_items.includes(:product)
@@ -34,10 +36,11 @@ class CartsController < ApplicationController
     return redirect_to cart_path(cart_item), alert: 'Item not found.' unless cart_item
 
     # Ensure the quantity is a valid integer
-    return redirect_to cart_path(cart_item), alert: 'Invalid quantity.' unless params[:quantity].present? 
+    return redirect_to cart_path(cart_item), alert: 'Invalid quantity.' unless params[:quantity].present?
+
     new_quantity = params[:quantity].to_i
 
-    if new_quantity > 0
+    if new_quantity.positive?
       cart_item.update(quantity: new_quantity)
       redirect_back fallback_location: cart_path(cart_item), notice: 'Quantity updated.'
     else

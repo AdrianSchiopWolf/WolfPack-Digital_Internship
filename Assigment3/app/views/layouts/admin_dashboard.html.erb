@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :styles %>
+  </head>
+
+  <body>
+    <div class="min-h-screen bg-cover" style="background-image: url(<%= asset_path('background.png') %>)">
+    <%= yield %>
+    </div>
+  </body>
+</html>

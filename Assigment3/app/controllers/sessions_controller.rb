@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   layout 'authenticated'
-  skip_before_action :require_login!, only: [:new, :create]
+  skip_before_action :require_login!, only: %i[new create]
 
   def new; end
 

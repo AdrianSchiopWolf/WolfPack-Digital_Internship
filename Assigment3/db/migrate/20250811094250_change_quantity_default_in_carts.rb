@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeQuantityDefaultInCarts < ActiveRecord::Migration[7.1]
   def change
     change_column_default :carts, :quantity, 1
