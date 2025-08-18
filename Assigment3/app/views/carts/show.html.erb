@@ -1,23 +1,31 @@
 <% content_for :styles do %>
-  <%= stylesheet_link_tag 'index', media: 'all' %>
+  <%= stylesheet_link_tag 'cart_page', media: 'all' %>
 <% end %>
 
 <% content_for :header_title do %>
   <%= current_user.username %>'s Cart
 <% end %>
-<div class="product-list-wrapper">
-  <section class="product-list" id="productList">
-    <div id="productsContainer">
-        <% if @cart_items.any? %>
-            <% @cart_items.each do |item| %>
-                <%= render partial: 'products/products_cards', locals: { product: item.product, 
-                                                                        show_delete_button: false, 
-                                                                        show_add_to_cart_button: false, 
-                                                                        is_cart: true,
-                                                                        item: item } %>
+<main class="cart-page">  
+  <div class="product-list-wrapper">
+    <section class="product-list" id="productList">
+      <div id="productsContainer">
+          <% if @cart_items.any? %>
+              <% @cart_items.each do |item| %>
+                  <%= render partial: 'products/products_cards', locals: { product: item.product, 
+                                                                          show_delete_button: false, 
+                                                                          show_add_to_cart_button: false, 
+                                                                          is_cart: true,
+                                                                          item: item } %>
 
-            <% end %>
-        <% end %>
-    </div>
+              <% end %>
+          <% end %>
+      </div>
+    </section>
+  </div>
+  <section class="cart-summary">
+    <h2>Cart Summary</h2>
+    <p>Total Items: <%= @cart_items.sum(&:quantity) %></p>
+    <p>Total Price: $<%= @cart_items.sum { |item| item.product.price * item.quantity } %></p>
+    <%= button_to 'Checkout', orders_path, method: :post, class: 'checkout-button' %>
   </section>
-</div>
+</main>

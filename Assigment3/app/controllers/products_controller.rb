@@ -1,38 +1,19 @@
+# frozen_string_literal: true
+
 class ProductsController < ApplicationController
   skip_before_action :require_login!, only: [:index]
-  
+
   def index
     @products = Product.all
     filter_by_category
     filter_by_price
     sort_products
-    respond_to do |format|
-      format.html # index.html.erb
-      format.turbo_stream { render partial: 'products/products_list', locals: { products: @products } }
-    end
-  end
 
-  def new
-    @product = Product.new
-    @products = Product.all
-  end
-
-  def create
-    @product = Product.new(product_params)
-    if @product.save
-      redirect_to new_product_path, notice: 'Product was successfully created.'
+    if turbo_frame_request?
+      render partial: 'list_products', locals: { products: @products, is_dash: false }
     else
-      @products = Product.all
-      render :new
+      render :index
     end
-  end
-
-  private
-
-  def destroy
-    @product = Product.find(params[:id])
-    @product.destroy
-    redirect_to products_path, notice: 'Product was successfully destroyed.'
   end
 
   private
@@ -53,7 +34,4 @@ class ProductsController < ApplicationController
     @products = @products.order(price: params[:sort]) if %w[asc desc].include?(params[:sort])
   end
 
-  def product_params
-    params.require(:product).permit(:name, :price, :category, :photo)
-  end
 end

@@ -1,12 +1,13 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   root 'products#index'
 
-  resources :products, only: [:index, :new, :create, :destroy]
+  resources :products, only: %i[index]
 
-  resources :users, only: [:new, :create]
+  resources :users, only: %i[new create]
 
-  resources :carts, only: [:index, :create, :destroy] do
+  resources :carts, only: %i[index create destroy] do
     member do
       patch :update_quantity
     end
@@ -21,5 +22,10 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: :logout
 
-  # Add any additional routes here
+  resources :orders, only: %i[index create] 
+
+  namespace :admin do
+    resources :orders, only: %i[index update]
+    resources :products, only: %i[new create destroy]
+  end
 end

@@ -5,19 +5,23 @@
         </li>
         <p class='point'></p>
         <li>
-            <%= link_to 'ABOUT', '#', class: 'nav-btn' %>
+            <%= link_to 'ABOUT', root_path, class: 'nav-btn' %>
         </li>
         <p class='point'></p>
         <li>
-            <%= link_to 'SERVICE', dashboard_path, class: 'nav-btn' %>
+            <% if logged_in? && current_user.admin? %>
+                <%= link_to 'SERVICE', new_admin_product_path, class: 'nav-btn' %>
+            <% else %>
+                <%= link_to 'SERVICE', root_path, class: 'nav-btn' %>
+            <% end %>
         </li>
         <p class='point'></p>
         <li>
-            <%= link_to 'BLOG', '#', class: 'nav-btn' %>
+            <%= link_to 'BLOG', root_path, class: 'nav-btn' %>
         </li>
         <p class='point'></p>
         <li>
-            <%= link_to 'CONTACTS', '#', class: 'nav-btn' %>
+            <%= link_to 'CONTACTS', root_path, class: 'nav-btn' %>
         </li>
         <% unless logged_in? %>
             <p class='point'></p>
@@ -29,6 +33,17 @@
                 <%= link_to 'SIGN UP', new_user_path, class: 'nav-btn' %>
             </li>
         <% else %>
+             <% if current_user.admin? %>
+                <p class='point'></p>
+                <li>
+                    <%= link_to 'ADMIN DASHBOARD', admin_orders_path, class: 'nav-btn' %>
+                </li>
+            <% else %>
+                <p class='point'></p>
+                <li>
+                    <%= link_to 'MY ORDERS', orders_path, class: 'nav-btn' %>
+                </li>
+            <% end %>
             <p class='point'></p>
             <li class="account-dropdown">
                 <button class="dropdown-toggle">ACCOUNT</button>
@@ -38,6 +53,7 @@
                     <%= button_to "Log Out", logout_path, method: :delete, class: "dropdown-item logout-btn", form: { style: "display:inline;" } %>
                 </div>
             </li>
+
         <% end %>
     </ul>
 </nav>

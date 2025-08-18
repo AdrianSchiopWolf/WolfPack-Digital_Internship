@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Product < ApplicationRecord
   has_one_attached :photo
 
@@ -7,4 +9,5 @@ class Product < ApplicationRecord
 
   has_many :cart_items, dependent: :destroy, class_name: 'Cart'
   has_many :users, dependent: :destroy, through: :cart_items
+  has_many :order_items, dependent: :destroy
 end
