@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
+  layout 'order_section'
+  
+  def index
+    @orders = current_user.orders.includes(:order_items, order_items: :product).order(created_at: :desc)
+  end
+  
   def create
     cart_items = current_user.cart_items.includes(:product)
 
@@ -30,4 +36,5 @@ class OrdersController < ApplicationController
   rescue StandardError => e
     redirect_to shopping_cart_path, alert: "Failed to create order: #{e.message}"
   end
+
 end

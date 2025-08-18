@@ -7,7 +7,7 @@
 <% end %>
 <main class="product-section">
 
-  <%= form_with model: @product, local: true, html:{ class: 'product-form__form' } do |form| %>
+  <%= form_with model: @product, url: admin_products_path, local: true, html:{ class: 'product-form__form' } do |form| %>
     <div>
       <%= form.label :name, 'Dish name:' %>
       <%= form.text_field :name, required: true %>

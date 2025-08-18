@@ -26,6 +26,6 @@
     <h2>Cart Summary</h2>
     <p>Total Items: <%= @cart_items.sum(&:quantity) %></p>
     <p>Total Price: $<%= @cart_items.sum { |item| item.product.price * item.quantity } %></p>
-    <%= button_to 'Checkout', 'checkout', method: :post, class: 'checkout-button' %>
+    <%= button_to 'Checkout', orders_path, method: :post, class: 'checkout-button' %>
   </section>
 </main>

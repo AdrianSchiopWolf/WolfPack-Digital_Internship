@@ -16,27 +16,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def new
-    @product = Product.new
-    @products = Product.all
-  end
-
-  def create
-    @product = Product.new(product_params)
-    if @product.save
-      redirect_to new_product_path, notice: 'Product was successfully created.'
-    else
-      @products = Product.all
-      render :new
-    end
-  end
-
-  def destroy
-    @product = Product.find(params[:id])
-    @product.destroy
-    redirect_to products_path, notice: 'Product was successfully destroyed.'
-  end
-
   private
 
   def filter_by_category
@@ -55,7 +34,4 @@ class ProductsController < ApplicationController
     @products = @products.order(price: params[:sort]) if %w[asc desc].include?(params[:sort])
   end
 
-  def product_params
-    params.require(:product).permit(:name, :price, :category, :photo)
-  end
 end

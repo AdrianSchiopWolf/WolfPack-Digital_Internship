@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   root 'products#index'
 
-  resources :products, only: %i[index new create destroy]
+  resources :products, only: %i[index]
 
   resources :users, only: %i[new create]
 
@@ -22,9 +22,10 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: :logout
 
-  post '/checkout', to: 'orders#create', as: :checkout
+  resources :orders, only: %i[index create] 
 
   namespace :admin do
     resources :orders, only: %i[index update]
+    resources :products, only: %i[new create destroy]
   end
 end
