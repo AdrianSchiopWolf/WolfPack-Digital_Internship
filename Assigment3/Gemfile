@@ -45,6 +45,11 @@ gem 'jsbundling-rails', '~> 0.1.0'
 
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'doorkeeper'
+
+gem 'alba'
+gem 'oj'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -78,3 +83,5 @@ gem 'activestorage-cloudinary-service', '~> 0.2.3'
 gem 'dotenv-rails', '~> 3.1'
 
 gem 'tailwindcss-rails', '~> 4.3'
+
+gem "devise", "~> 4.9"

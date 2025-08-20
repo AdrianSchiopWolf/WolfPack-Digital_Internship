@@ -11,9 +11,9 @@
 
   <% if show_delete_button %>
     <%= button_to 'Delete', admin_product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-button' %>
-  <% elsif logged_in? && show_add_to_cart_button %>
+  <% elsif user_signed_in? && show_add_to_cart_button %>
     <%= button_to 'Add to Cart', carts_path(product_id: product.id), method: :post, class: 'add-to-cart-button' %>
-  <% elsif logged_in? && is_cart && item.present? %>
+  <% elsif user_signed_in? && is_cart && item.present? %>
     <div class="cart-quantity-controls">
       <%= button_to "-", update_quantity_cart_path(item, quantity: item.quantity - 1), method: :patch, class:"quantity button" %>
       <span class="quantity-display"><%= item.quantity %></span>
