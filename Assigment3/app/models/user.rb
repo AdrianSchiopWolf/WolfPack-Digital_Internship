@@ -1,5 +1,20 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  username               :string           not null
+#  email                  :string           not null
+#  role                   :integer          default("user"), not null
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#
 class User < ApplicationRecord
   class << self
     def authenticate(email, password)
@@ -13,9 +28,8 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
   validate :password_complexity
-
+  has_many :cart_items, dependent: :destroy
   has_many :products, dependent: :destroy, through: :cart_items
-  has_many :cart_items, dependent: :destroy, class_name: 'Cart'
   has_many :orders, dependent: :destroy
   has_many :access_tokens, class_name: 'Doorkeeper::AccessToken', foreign_key: :resource_owner_id, dependent: :delete_all
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: carts
@@ -10,9 +12,7 @@
 #  updated_at    :datetime         not null
 #  quantity      :integer          default(1), not null
 #
-one:
-  product: product_one
-  user: user_one
-two:
-  product: product_two
-  user: user_two
+class CartItem < ApplicationRecord
+  belongs_to :user
+  belongs_to :product
+end

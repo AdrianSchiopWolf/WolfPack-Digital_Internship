@@ -13,3 +13,4 @@ Doorkeeper::Application.find_or_create_by!(name: 'Default API Client') do |app|
   app.redirect_uri = 'urn:ietf:wg:oauth:2.0:oob'
   app.scopes = ''
 end
+

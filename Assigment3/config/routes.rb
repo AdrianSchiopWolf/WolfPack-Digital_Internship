@@ -32,9 +32,29 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: %i[create destroy]
+      resources :users, only: %i[create] do
+        delete '/', action: :destroy, on: :collection
+      end
 
-      resources :sessions, only: %i[create destroy]
+      resources :sessions, only: %i[create] do
+        delete '/', action: :destroy, on: :collection
+      end
+
+      resources :products, only: %i[index]
+
+      resources :carts, only: %i[index create destroy] do
+        member do
+          patch :update_quantity
+        end
+      end
+
+      resources :orders, only: %i[index create]
+
+      namespace :admin do
+        resources :users, only: %i[index]
+        resources :products, only: %i[create destroy]
+        resources :orders, only: %i[index update]
+      end
     end
   end
 end

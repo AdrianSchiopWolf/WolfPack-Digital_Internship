@@ -9,12 +9,9 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-product_one:
-  name: MyString
-  category: MyString
-  price: 9.99
-
-product_two:
-  name: MyString
-  category: MyString
-  price: 9.99
+class ProductSerializer < ApplicationSerializer
+  attributes :id, :name, :price, :category
+  attribute :photo_url do |product|
+    Rails.application.routes.url_helpers.url_for(product.photo) if product.photo.attached?
+  end
+end

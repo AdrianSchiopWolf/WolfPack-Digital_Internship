@@ -18,9 +18,12 @@ module Api
       end
 
       def destroy
-        doorkeeper_token.revoke
-
-        head :ok
+        if doorkeeper_token
+          doorkeeper_token.revoke
+          head :ok
+        else
+          render json: { error: 'Invalid or missing token' }, status: :unauthorized
+        end
       end
 
       private
