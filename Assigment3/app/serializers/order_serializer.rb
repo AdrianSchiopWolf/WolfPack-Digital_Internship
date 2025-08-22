@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderSerializer
   include Alba::Resource
 

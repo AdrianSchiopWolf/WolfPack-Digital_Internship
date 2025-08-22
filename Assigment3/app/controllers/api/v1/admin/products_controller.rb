@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     module Admin
       class ProductsController < Api::V1::Admin::BaseController
+        # include Api::V1::Admin::ProductsControllerDoc
 
         def create
           product = Product.new(product_params)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, type: :request do
@@ -45,7 +47,6 @@ RSpec.describe Api::V1::UsersController, type: :request do
       end
 
       it 'returns an unprocessable entity for invalid email format' do
-
         params[:email] = 'invalid-email'
 
         perform_request

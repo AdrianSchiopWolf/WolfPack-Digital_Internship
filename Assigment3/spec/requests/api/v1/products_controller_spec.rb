@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Api::V1::ProductsController, type: :request do
   let(:user) { create(:user) }
   let(:token) { auth_tokens(user.id) }
-  
+
   describe 'GET /api/v1/products' do
     subject(:perform_request) do
-      get api_v1_products_path, 
-      headers: { **common_headers, **auth_headers(token[:access_token]) }
+      get api_v1_products_path,
+          headers: { **common_headers, **auth_headers(token[:access_token]) }
     end
 
     let!(:products) { create_list(:product, 3) }
@@ -27,7 +29,7 @@ RSpec.describe Api::V1::ProductsController, type: :request do
         :id,
         :name,
         :category,
-        :price,
+        :price
       )
     end
   end

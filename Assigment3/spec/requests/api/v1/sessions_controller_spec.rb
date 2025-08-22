@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Api::V1::SessionsController, type: :request do
@@ -46,16 +48,14 @@ RSpec.describe Api::V1::SessionsController, type: :request do
 
   describe 'DELETE /api/v1/sessions' do
     subject(:perform_request) do
-      delete api_v1_sessions_path, 
-      headers: headers
+      delete api_v1_sessions_path,
+             headers: headers
     end
 
     context 'with valid token' do
-      let(:headers)  {{ **common_headers, **auth_headers(token[:access_token]) }}
+      let(:headers) { { **common_headers, **auth_headers(token[:access_token]) } }
       let!(:user) { create(:user) }
       let!(:token) { auth_tokens(user.id) }
-
-
 
       it 'returns a success status' do
         perform_request

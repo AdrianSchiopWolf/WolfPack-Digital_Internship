@@ -3,6 +3,8 @@
 module Api
   module V1
     class UsersController < BaseController
+      # include Api::V1::UsersControllerDoc
+
       skip_before_action :doorkeeper_authorize!, only: [:create]
 
       def create

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CartItemSerializer < ApplicationSerializer
   attributes :id, :quantity, :product
 

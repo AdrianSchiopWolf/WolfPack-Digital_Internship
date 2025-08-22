@@ -10,7 +10,7 @@ class CartsController < ApplicationController
   # POST /api/v1/cart
   def create
     product = Product.find_by(id: params[:product_id])
-    
+
     unless product
       render json: { error: 'Product not found' }, status: :not_found
       return

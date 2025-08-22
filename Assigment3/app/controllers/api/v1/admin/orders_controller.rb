@@ -1,7 +1,11 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     module Admin
       class OrdersController < Api::V1::Admin::BaseController
+        # include Api::V1::Admin::OrdersControllerDoc
+
         before_action :set_order, only: [:update]
 
         # GET /api/v1/admin/orders

@@ -3,6 +3,8 @@
 module Api
   module V1
     class SessionsController < BaseController
+      include Api::V1::SessionsControllerDoc
+
       skip_before_action :doorkeeper_authorize!, only: :create
 
       def create

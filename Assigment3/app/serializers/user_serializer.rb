@@ -24,7 +24,6 @@ class UserSerializer < ApplicationSerializer
     @with_auth_tokens = with_auth_tokens
   end
 
-
   attribute :message, if: proc { params[:with_message].present? } do
     params[:with_message]
   end
