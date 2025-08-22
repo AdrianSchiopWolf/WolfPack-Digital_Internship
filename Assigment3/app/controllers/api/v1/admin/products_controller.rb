@@ -15,8 +15,7 @@ module Api
         def destroy
           product = Product.find(params[:id])
           if product.destroy
-            head :no_content
-            render json: { message: 'Product deleted successfully' }, status: :ok
+            render json: { message: 'Product deleted successfully' }, status: :no_content
           else
             render json: { errors: product.errors.full_messages }, status: :unprocessable_entity
           end

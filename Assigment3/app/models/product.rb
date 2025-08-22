@@ -18,7 +18,7 @@ class Product < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :category, presence: true
 
-  has_many :cart_items, dependent: :destroy, class_name: 'Cart'
+  has_many :cart_items, dependent: :destroy
   has_many :users, dependent: :destroy, through: :cart_items
   has_many :order_items, dependent: :destroy
 end

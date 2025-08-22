@@ -20,7 +20,7 @@ module Api
       def destroy
         if doorkeeper_token
           doorkeeper_token.revoke
-          head :ok
+          render json: { message: 'Logged out successfully' }, status: :ok
         else
           render json: { error: 'Invalid or missing token' }, status: :unauthorized
         end
