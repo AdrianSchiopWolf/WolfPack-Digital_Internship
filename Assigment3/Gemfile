@@ -45,6 +45,11 @@ gem 'jsbundling-rails', '~> 0.1.0'
 
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'doorkeeper'
+
+gem 'alba'
+gem 'oj'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -69,7 +74,14 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'rspec-rails', '~> 5.0'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
+
+gem "apipie-rails"
+
+gem 'annotate'
 
 gem 'cloudinary', '~> 2.3'
 
@@ -78,3 +90,5 @@ gem 'activestorage-cloudinary-service', '~> 0.2.3'
 gem 'dotenv-rails', '~> 3.1'
 
 gem 'tailwindcss-rails', '~> 4.3'
+
+gem "devise", "~> 4.9"

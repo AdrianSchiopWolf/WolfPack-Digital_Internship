@@ -3,7 +3,7 @@
 <% end %>
 
 <div class="sign-up-container">
-    <%= form_with url: login_path, method: :post, local: true do |form| %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |form| %>
         <div class="form-group">
             <%= form.label :email %>
             <%= form.email_field :email, class: "form-control" %>

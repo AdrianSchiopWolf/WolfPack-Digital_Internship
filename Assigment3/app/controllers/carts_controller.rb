@@ -7,18 +7,21 @@ class CartsController < ApplicationController
     @cart_items = current_user.cart_items.includes(:product)
   end
 
+  # POST /api/v1/cart
   def create
-    product = Product.find(params[:product_id])
-    if product.nil?
-      redirect_to root_path, alert: 'Product not found.'
+    product = Product.find_by(id: params[:product_id])
+
+    unless product
+      render json: { error: 'Product not found' }, status: :not_found
       return
     end
-    @cart_item = current_user.cart_items.find_or_initialize_by(product: product)
 
-    if @cart_item.save
-      redirect_to root_path, notice: 'Item added to cart successfully.'
+    cart_item = current_user.cart_items.find_or_initialize_by(product: product)
+
+    if cart_item.save
+      render json: CartItemSerializer.new(cart_item), status: :created
     else
-      redirect_to root_path, alert: 'Failed to add item to cart.'
+      render json: { error: 'Failed to add item to cart', details: cart_item.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

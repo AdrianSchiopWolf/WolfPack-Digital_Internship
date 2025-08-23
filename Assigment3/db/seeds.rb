@@ -9,9 +9,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-User.find_or_create_by!(email: 'admin@gmail.com') do |user|
-  user.username = 'admin'
-  user.password = 'dada' # meets your validation rules
-  user.password_confirmation = 'dada'
-  user.role = :admin
+Doorkeeper::Application.find_or_create_by!(name: 'Default API Client') do |app|
+  app.redirect_uri = 'urn:ietf:wg:oauth:2.0:oob'
+  app.scopes = ''
 end

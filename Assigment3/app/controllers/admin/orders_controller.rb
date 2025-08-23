@@ -3,6 +3,7 @@
 module Admin
   class OrdersController < Admin::BaseController
     layout 'order_section'
+
     def index
       @orders = Order.all.includes(:user, order_items: :product).order(created_at: :desc)
       render 'orders/index'

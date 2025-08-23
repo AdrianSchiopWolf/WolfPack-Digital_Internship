@@ -3,7 +3,7 @@
 <% end %>
 
 <div class="sign-up-container">
-    <%= form_with model: @user, local: true do |form| %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form| %>
         <div class="form-group">
             <%= form.label :username %>
             <%= form.text_field :username, class: "form-control" %>

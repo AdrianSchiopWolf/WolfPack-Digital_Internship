@@ -9,7 +9,7 @@
         </li>
         <p class='point'></p>
         <li>
-            <% if logged_in? && current_user.admin? %>
+            <% if user_signed_in? && current_user.admin? %>
                 <%= link_to 'SERVICE', new_admin_product_path, class: 'nav-btn' %>
             <% else %>
                 <%= link_to 'SERVICE', root_path, class: 'nav-btn' %>
@@ -23,14 +23,14 @@
         <li>
             <%= link_to 'CONTACTS', root_path, class: 'nav-btn' %>
         </li>
-        <% unless logged_in? %>
+        <% unless user_signed_in? %>
             <p class='point'></p>
             <li>
-                <%= link_to 'LOG IN', login_path, class: 'nav-btn' %>
+                <%= link_to 'LOG IN',  new_user_session_path, class: 'nav-btn' %>
             </li>
             <p class='point'></p>
             <li>
-                <%= link_to 'SIGN UP', new_user_path, class: 'nav-btn' %>
+                <%= link_to 'SIGN UP', new_user_registration_path, class: 'nav-btn' %>
             </li>
         <% else %>
              <% if current_user.admin? %>
@@ -50,7 +50,7 @@
                     <div class="dropdown-menu">
                     <p class="username-display"><%= current_user.username %></p>
                     <%= link_to "Cart", shopping_cart_path, class: "dropdown-item" %>
-                    <%= button_to "Log Out", logout_path, method: :delete, class: "dropdown-item logout-btn", form: { style: "display:inline;" } %>
+                    <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item logout-btn", form: { style: "display:inline;" } %>
                 </div>
             </li>
 
